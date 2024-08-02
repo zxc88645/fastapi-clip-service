@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+torch
+torchvision
+ftfy
+regex
+tqdm
+Pillow
+requests
+git+https://github.com/openai/CLIP.git
