@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 
-class ImageRequest(BaseModel):
+class ImageRequestUrl(BaseModel):
     url: str
 
 

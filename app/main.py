@@ -1,11 +1,17 @@
-from fastapi import FastAPI, HTTPException, Request, Depends, Security
+from fastapi import FastAPI, HTTPException, Request, Depends, Security, UploadFile, File
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 import os
 from dotenv import load_dotenv
 from app.feature_extraction_service import FeatureExtractionService
-from app.models import ImageRequest, TextRequest, CombinedRequest, CompareRequest
+from app.models import (
+    ImageRequestUrl,
+    TextRequest,
+    CombinedRequest,
+    CompareRequest,
+)
+
 
 # 加載 .env 文件中的環境變數
 load_dotenv()
@@ -45,13 +51,30 @@ async def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
-@app.post("/extract-image-features/", tags=["Image Features"], summary="提取圖像特徵")
+@app.post(
+    "/extract-image-features/url/", tags=["Image Features"], summary="提取圖像特徵"
+)
 async def extract_image_features(
-    request: ImageRequest, token: str = Depends(verify_token)
+    request: ImageRequestUrl, token: str = Depends(verify_token)
 ):
     """提取給定圖像 URL 的特徵。"""
     try:
         features = service.extract_features_from_image(request.url)
+        return {"features": features}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post(
+    "/extract-image-features/upload/", tags=["Image Features"], summary="提取圖像特徵"
+)
+async def extract_image_features(
+    file: UploadFile = File(...), token: str = Depends(verify_token)
+):
+    """提取給定上傳圖像的特徵。"""
+    try:
+        img: bytes = await file.read()
+        features = service.extract_features_from_image(img)
         return {"features": features}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -69,7 +92,9 @@ async def extract_text_features(
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.post("/extract-combined-features/", tags=["Combined Features"], summary="提取結合特徵")
+@app.post(
+    "/extract-combined-features/", tags=["Combined Features"], summary="提取結合特徵"
+)
 async def extract_combined_features(
     request: CombinedRequest, token: str = Depends(verify_token)
 ):
@@ -81,7 +106,9 @@ async def extract_combined_features(
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.post("/compare/", tags=["Feature Comparison"], summary="比較圖片與多組文字的相似度")
+@app.post(
+    "/compare/", tags=["Feature Comparison"], summary="比較圖片與多組文字的相似度"
+)
 async def compare(request: CompareRequest, token: str = Depends(verify_token)):
     try:
         similarity = service.compare(request.url, request.text)

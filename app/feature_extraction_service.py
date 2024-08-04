@@ -1,13 +1,11 @@
-from app.image_utils import load_image, download_image
+from app.image_utils import load_image
 import clip
 import torch
 import time
 import os
 import pickle
-from PIL import Image
-import requests
-
-from io import BytesIO
+from typing import Union
+from fastapi import UploadFile
 
 
 class FeatureExtractionService:
@@ -55,7 +53,9 @@ class FeatureExtractionService:
                 pickle.dump((self.model, self.preprocess), f)
             print(f"模型已儲存到 {self.model_path}")
 
-    def extract_features_from_image(self, image_path_or_url: str) -> list:
+    def extract_features_from_image(
+        self, image_path_or_url: Union[str, bytes]
+    ) -> list:
         """提取圖片特徵。"""
         image = load_image(image_path_or_url)
 
