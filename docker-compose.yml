@@ -1,0 +1,9 @@
+services:
+  fastapi-clip-service:
+    image: fastapi-clip-service:latest
+    env_file:
+      - .env
+    build:
+      context: .
+    ports:
+      - "${PORT}:8000"

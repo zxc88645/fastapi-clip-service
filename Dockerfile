@@ -2,16 +2,17 @@
 FROM python:3.12
 
 # 設置工作目錄
-WORKDIR /app
+WORKDIR /code
 
-# 複製項目文件
-COPY . .
+# 複製依賴文件
+COPY ./requirements.txt /code/requirements.txt
 
 # 安裝依賴
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
-# 暴露服務端口
-EXPOSE 8000
+
+# 複製項目文件
+COPY ./app /code/app
 
 # 運行服務
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app.main:app", "--proxy-headers", "--host", "0.0.0.0", "--port", "8000"]

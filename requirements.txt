@@ -1,10 +1,12 @@
 fastapi
 uvicorn
-torch
-torchvision
-ftfy
-regex
+python-dotenv
+torch 
+torchvision 
+torchaudio
+ftfy 
+regex 
 tqdm
-Pillow
 requests
+python-multipart
 git+https://github.com/openai/CLIP.git
