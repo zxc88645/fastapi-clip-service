@@ -29,8 +29,16 @@ def load_image(image_path_or_data: Union[str, bytes]) -> Image.Image:
 
 def download_image(url: str) -> Image.Image:
     """從網址下載圖片並計算下載時間。"""
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Connection': 'keep-alive',
+    }
+
     start_time = time.time()  # 開始計時
-    response = requests.get(url)
+    response = requests.get(url, headers=headers, timeout=5)
     response.raise_for_status()  # 確保下載成功
     end_time = time.time()  # 結束計時
     elapsed_time = end_time - start_time
