@@ -22,5 +22,5 @@ env
 
 # 忽略其他不需要的文件
 *.log
-.cache
+#.cache
 
