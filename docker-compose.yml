@@ -8,3 +8,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "${PORT}:8000"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "1"

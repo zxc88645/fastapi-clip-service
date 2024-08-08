@@ -8,7 +8,7 @@ from typing import Union
 
 def load_image(image_path_or_data: Union[str, bytes]) -> Image.Image:
     """根據輸入類型加載圖片，可以是本地檔案、圖片網址或二進位數據。"""
-    print(f"正在加載圖片: {image_path_or_data}")
+    print(f"正在加載圖片: {repr(image_path_or_data)}")
     # 類型
     print(type(image_path_or_data))
 
