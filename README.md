@@ -24,10 +24,10 @@ pip install -r requirements.txt
 ```bash
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
+
 ### 訪問服務
 
 在瀏覽器中訪問 [http://localhost/:8000](http://localhost/:8000) 以查看應用。
-
 
 ## 使用 Docker 運行
 
@@ -36,21 +36,20 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 可以複製 .env.example 為 .env，並配置 .env 文件。
 預設運行端口為 8000。
 
-### 構建 Docker 映像：
+### 構建 Docker 映像
 
 使用以下命令構建 Docker 映像：
 
 ```bash
-docker-compose build
+docker compose build
 ```
 
-### 運行 Docker 容器：
+### 運行 Docker 容器
 
 使用以下命令運行 Docker 容器：
 
-
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 ### 訪問服務
@@ -65,3 +64,4 @@ API 端點
  - POST /extract-text-features/: 從提供的文本中提取特徵。
  - POST /extract-combined-features/: 從提供的圖像 URL 和文本中提取特徵。
  - POST /compare/: 比較
+```
