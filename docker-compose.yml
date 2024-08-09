@@ -20,7 +20,7 @@ services:
     logging:
       driver: "json-file"
       options:
-        max-size: "10m"
+        max-size: "2m"
         max-file: "1"
     volumes:
       - ./.cache:/code/.cache
