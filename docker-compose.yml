@@ -8,6 +8,13 @@ services:
       dockerfile: Dockerfile
     ports:
       - "${PORT}:8000"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1  # 指定需要的 GPU 數量
+              capabilities: [gpu]
     logging:
       driver: "json-file"
       options:

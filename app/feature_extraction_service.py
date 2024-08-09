@@ -20,7 +20,7 @@ class FeatureExtractionService:
 
         # 設置模型路徑
         self.model_path = os.path.join(
-            self.cache_dir, f"{model_name.replace('/', '_')}_model.pkl"
+            self.cache_dir, f"{model_name.replace('/', '_')}_{self.device}_model.pkl"
         )
 
         # 加載模型
