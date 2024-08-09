@@ -53,11 +53,11 @@ class FeatureExtractionService:
                 pickle.dump((self.model, self.preprocess), f)
             print(f"模型已儲存到 {self.model_path}")
 
-    def extract_features_from_image(
+    async def extract_features_from_image(
         self, image_path_or_url: Union[str, bytes]
     ) -> list:
         """提取圖片特徵。"""
-        image = load_image(image_path_or_url)
+        image = await load_image(image_path_or_url)
 
         # 圖片預處理時間
         preprocess_start = time.time()
