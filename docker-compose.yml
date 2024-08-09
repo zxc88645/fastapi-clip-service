@@ -13,10 +13,14 @@ services:
         reservations:
           devices:
             - driver: nvidia
-              count: 1  # 指定需要的 GPU 數量
+              count: ${GPU_COUNT} # 指定需要的 GPU 數量
               capabilities: [gpu]
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=${USE_GPU} # 如果 USE_GPU 為 true，設置為 all 或指定 ID
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "1"
+    volumes:
+      - ./.cache:/code/.cache
