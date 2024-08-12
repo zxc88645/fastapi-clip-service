@@ -8,5 +8,6 @@ ftfy
 regex 
 tqdm
 requests
+aiohttp
 python-multipart
 git+https://github.com/openai/CLIP.git

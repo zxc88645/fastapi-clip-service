@@ -59,7 +59,7 @@ async def extract_image_features(
 ):
     """提取給定圖像 URL 的特徵。"""
     try:
-        features = service.extract_features_from_image(request.url)
+        features = await service.extract_features_from_image(request.url)
         return {"features": features}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
