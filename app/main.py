@@ -111,7 +111,7 @@ async def extract_combined_features(
 )
 async def compare(request: CompareRequest, token: str = Depends(verify_token)):
     try:
-        similarity = service.compare(request.url, request.text)
+        similarity = await service.compare(request.url, request.text)
         return {"similarity": similarity.tolist()}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

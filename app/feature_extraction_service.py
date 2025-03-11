@@ -86,9 +86,9 @@ class FeatureExtractionService:
 
         return text_features.cpu().numpy().tolist()
 
-    def compare(self, image_path_or_url: str, text: list) -> float:
+    async def compare(self, image_path_or_url: str, text: list) -> float:
         """比較圖像和文本的相似性。"""
-        image = load_image(image_path_or_url)
+        image = await load_image(image_path_or_url)
         image = self.preprocess(image).unsqueeze(0).to(self.device)
         text = clip.tokenize(text).to(self.device)
 
