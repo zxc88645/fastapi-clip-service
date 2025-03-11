@@ -27,7 +27,7 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
 ### 訪問服務
 
-在瀏覽器中訪問 [http://localhost/:8000](http://localhost/:8000) 以查看應用。
+在瀏覽器中訪問 [http://localhost:8000](http://localhost:8000) 以查看應用。
 
 ## 使用 Docker 運行
 
@@ -54,7 +54,7 @@ docker compose up -d
 
 ### 訪問服務
 
-在瀏覽器中訪問 [http://localhost/:8000](http://localhost/:8000) 以查看應用。
+在瀏覽器中訪問 [http://localhost:8000](http://localhost:8000) 以查看應用。
 
 ```
 
